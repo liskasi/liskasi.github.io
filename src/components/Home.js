@@ -1,6 +1,7 @@
 import { PureComponent } from "react";
 import { Container, Row, Col } from 'react-grid-system';
-import Checkbox from "./checkbox/checkbox";
+import '../style/home/home.style.css';
+
 
 class HomePage extends PureComponent {
 
@@ -8,21 +9,33 @@ class HomePage extends PureComponent {
         super(props);
 
         this.state = {
-          isChecked:false,
           products: [],
         };
       this.handleChange = this.handleChange.bind(this);
-
+      this.deleteMass = this.deleteMass.bind(this);
+      this.renderGrid = this.renderGrid.bind(this);
     }
 
     componentDidMount() {
         // Simple GET request using fetch
         fetch('http://127.0.0.1:8000/')
             .then(response => response.json())
-            .then((data) => this.setState({products: data}));
+            .then((data) => this.setState({products: data}))
     }
     
     deleteMass() {
+      const { productsChecked } = this.state;
+      //console.log(productsChecked);
+      //console.log(JSON.stringify(this.state));
+
+      fetch(`http://127.0.0.1:8000/delete`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(productsChecked)
+      }).then(() => {
+          window.location.href = "http://localhost:3000/";
+      })
+
 
     }
 
@@ -30,51 +43,80 @@ class HomePage extends PureComponent {
       window.location.href = "http://localhost:3000/add-product";
     }
 
-    handleChange() {
-      setChecked(!checked);
+    handleChange(event) {
+      const { id } = event.target;
+      const { productsChecked } = this.state;
 
-      // const updatedCheckedState = checkedState.map((product,index) =>
-      //   index === position ? !product : product
-      //   );
-      // setCheckedState(updatedCheckedState);
+      const isChecked = productsChecked.indexOf(id) === -1 ? false : true;
 
+      if(isChecked) {
+        this.setState({productsChecked: productsChecked.filter(product => product !== id)});
+      } else {
+        productsChecked.push(id);
+      }
     }
 
     renderGrid()
     {
       const { products } = this.state;
       return (
-        <Container>
+        <Container class="grid-container" spacing={4}>
             <Row>
               {
-            products.map((product) => (
-                <Col xs={6} md={4}>
-                  <input type="checkbox" name={product.sku} checked={false}id={product.sku} onChange={this.handleChange}  />
-                  <ol>
-                    { product.sku }
-                    { product.name }
-                    { product.price }
-                    { product.attribute }
-                  </ol>
+                products.map(({id, sku,name,price,attribute}) => (
+                <Col xs={3} >
+                  <div class="product-cell">
+                    <input type="checkbox" class="delete-checkbox" name={sku} id={id} onChange={this.handleChange}  />
+                    <ul class="product-details">
+                      <li>{ sku }</li>
+                      <li>{ name }</li>
+                      <li>{ price }</li>
+                      <li>{ attribute }</li>
+                    </ul>
+                  </div>
                 </Col>
             ))
             }
             </Row>
 
         </Container>
+        // <div class="grid-container">
+        //   <div>
+        //     {
+        //       products.map(({id, sku,name,price,attribute}) => (
+        //       <div class="product">
+        //         <input type="checkbox" class="delete-checkbox" name={sku} id={id} onChange={this.handleChange}  />
+        //         <ol>
+        //           { sku }
+        //           { name }
+        //           { price }
+        //           { attribute }
+        //         </ol>
+        //       </div>
+        //   ))
+        //   }
+        //   </div>
+        // </div>
+
       );
     }
 
     render() {
       return (
         <div>
-          <button onClick={this.deleteMass}>
-            Delete MASS
-          </button>
+          <div class="header">
+            <header>Product List</header>
+            <div>
+              <button onClick={this.deleteMass}>
+                DELETE MASS
+              </button>
 
-          <button onClick={this.addProduct}>
-            Add
-          </button>
+              <button onClick={this.addProduct}>
+                ADD
+              </button>
+            </div>
+          </div>
+          <hr/>
           { this.renderGrid() }
         </div>
       )

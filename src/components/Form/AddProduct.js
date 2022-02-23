@@ -63,8 +63,16 @@ class Product extends PureComponent {
             length
         } = this.state;
 
-        const newPrice = price.replace(',','.');
-        this.setState({ price : newPrice });
+        // const newPrice = price.replace(',','.');
+        // const newSize = size.replace(',','.');
+        // const newWeight = weight.replace(',','.');
+        // const newHeight = height.replace(',','.');
+        // const newWidth = width.replace(',','.');
+        // const newLength = length.replace(',','.');
+
+        // this.setState({ price : newPrice, size : newSize, weight : newWeight, height : newHeight, width : newWidth, length : newLength }, () => {
+
+        // });
 
         const isPriceValid = !isNaN(price);
         const isSizeValid = type === 'dvd' && isNaN(size) ? false : true;
@@ -111,17 +119,16 @@ class Product extends PureComponent {
 
         if (isValid) 
         {
-            //console.log(JSON.stringify(this.state));
+            console.log(JSON.stringify(this.state));
 
-            // fetch(`http://127.0.0.1:8000/add-product/${type}`, {
-            //     method: 'POST',
-            //     headers: {'Content-Type': 'application/json'},
-            //     body: JSON.stringify(this.state)
-            // }).then(() => {
-            //     window.location.href = "http://localhost:3000/";
-            // })
+            fetch(`http://127.0.0.1:8000/add-product/${type}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(this.state)
+            }).then(() => {
+                window.location.href = "http://localhost:3000/";
+            })
         }
-
     }
     
     cancelFunction() {
@@ -132,7 +139,7 @@ class Product extends PureComponent {
 
     renderSelect() {
         return (
-            <select name='type' value={this.state.type} onChange={this.handleChange}>
+            <select id='productType' name='type' value={this.state.type} onChange={this.handleChange}>
                 <option value='dvd'>DVD</option>
                 <option value='book'>Book</option>
                 <option value='furniture'>Furniture</option>
@@ -142,7 +149,7 @@ class Product extends PureComponent {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form id='product_form' onSubmit={this.handleSubmit}>
                 <div>
                     <label htmlFor='sku'>SKU
                         <input type="text" name='sku' id='sku' value={this.state.sku} onChange={this.handleChange}/>
@@ -163,7 +170,7 @@ class Product extends PureComponent {
                     { this.renderSelect() }
                 </label>
                     <ProductForm id={this.state.type} formState={this.state} handleChange={this.handleChange} />
-                <input type="submit" name="button" value="Save" /> 
+                <button type="submit" name="button" value="Save" onClick={this.handleSubmit}>Save</button> 
                 <button type="button" name="button" value="cancel" onClick={this.cancelFunction}>Cancel</button>
             </form>
         )
