@@ -1,6 +1,6 @@
 import { PureComponent } from "react";
-import { Container, Row, Col } from 'react-grid-system';
-import '../style/home/home.style.css';
+import '../../style/HomePage/home.style.css';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 
 class HomePage extends PureComponent {
@@ -10,6 +10,7 @@ class HomePage extends PureComponent {
 
         this.state = {
           products: [],
+          productsChecked: []
         };
       this.handleChange = this.handleChange.bind(this);
       this.deleteMass = this.deleteMass.bind(this);
@@ -62,8 +63,7 @@ class HomePage extends PureComponent {
       return (
         <Container class="grid-container" spacing={4}>
             <Row>
-              {
-                products.map(({id, sku,name,price,attribute}) => (
+              {products.map(({id, sku,name,price,attribute}) => (
                 <Col xs={3} >
                   <div class="product-cell">
                     <input type="checkbox" class="delete-checkbox" name={sku} id={id} onChange={this.handleChange}  />
@@ -78,44 +78,24 @@ class HomePage extends PureComponent {
             ))
             }
             </Row>
-
         </Container>
-        // <div class="grid-container">
-        //   <div>
-        //     {
-        //       products.map(({id, sku,name,price,attribute}) => (
-        //       <div class="product">
-        //         <input type="checkbox" class="delete-checkbox" name={sku} id={id} onChange={this.handleChange}  />
-        //         <ol>
-        //           { sku }
-        //           { name }
-        //           { price }
-        //           { attribute }
-        //         </ol>
-        //       </div>
-        //   ))
-        //   }
-        //   </div>
-        // </div>
-
       );
     }
 
     render() {
       return (
         <div>
-          <div class="header">
-            <header>Product List</header>
+          <header>
+            <h1>Product List</h1>
             <div>
-              <button onClick={this.deleteMass}>
-                DELETE MASS
-              </button>
-
-              <button onClick={this.addProduct}>
+                <Button variant="outline-danger" id="delete-product-onclick" onClick={this.deleteMass}>
+                  DELETE MASS
+                </Button> {' '}
+              <Button variant="outline-success" onClick={this.addProduct}>
                 ADD
-              </button>
+              </Button> {' '}
             </div>
-          </div>
+          </header>
           <hr/>
           { this.renderGrid() }
         </div>

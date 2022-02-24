@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import ProductForm from '../ProductForm/ProductForm';
+import { Button } from 'react-bootstrap';
+import '../../style/Form/form.style.css';
 
 class Product extends PureComponent {
 
@@ -150,28 +152,37 @@ class Product extends PureComponent {
     render() {
         return (
             <form id='product_form' onSubmit={this.handleSubmit}>
-                <div>
-                    <label htmlFor='sku'>SKU
-                        <input type="text" name='sku' id='sku' value={this.state.sku} onChange={this.handleChange}/>
-                    </label>
+                <header>
+                    <h1>Add product</h1>
                     <div>
-                        { this.state.skuError }
+                        <Button variant="outline-success" type="submit" name="button" value="Save" onClick={this.handleSubmit}>
+                            Save
+                        </Button> {' '}
+                    <Button type="button" variant="outline-danger" name="button" value="cancel" onClick={this.cancelFunction}>
+                        Cancel
+                    </Button> {' '}
                     </div>
-                </div>
-                
-                <label htmlFor='name'>Name
-                    <input type="text" name='name' id='name' value={this.state.name} onChange={this.handleChange}/>
-                </label>
-                <label htmlFor='price'>Price ($)
-                    <input type="text" name='price' id='price' value={this.state.price} onChange={this.handleChange}/>
-                </label>
+                </header>
+                <hr/>
 
-                <label> Pick type of product:
+                <div>
+                    <label htmlFor='sku'>SKU</label>
+                    <input type="text" name='sku' id='sku' value={this.state.sku} onChange={this.handleChange}/>
+                </div>
+
+                <div>
+                    <label htmlFor='name'>Name</label>
+                        <input type="text" name='name' id='name' value={this.state.name} onChange={this.handleChange}/>
+                </div>
+
+                <div>
+                    <label htmlFor='price'>Price ($)</label>
+                        <input type="text" name='price' id='price' value={this.state.price} onChange={this.handleChange}/>
+                </div>
+
+                <label> Type Switcher:</label>
                     { this.renderSelect() }
-                </label>
                     <ProductForm id={this.state.type} formState={this.state} handleChange={this.handleChange} />
-                <button type="submit" name="button" value="Save" onClick={this.handleSubmit}>Save</button> 
-                <button type="button" name="button" value="cancel" onClick={this.cancelFunction}>Cancel</button>
             </form>
         )
     }

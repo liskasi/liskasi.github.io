@@ -9,7 +9,7 @@ const Layout = () => {
         
         <footer>
         <hr />
-            <p>Scandiweb Test assigment</p>
+            <p id="footer-text">Scandiweb Test assigment</p>
         </footer>
       </>
     )

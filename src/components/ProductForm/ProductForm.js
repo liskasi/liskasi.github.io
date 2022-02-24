@@ -33,14 +33,22 @@ class ProductForm extends PureComponent {
         
     };
 
+    formDescription = {
+        dvd: "Please, provide size",
+        furniture: "Please, provide dimensions",
+        book: "Please, provide weight"
+    };
+
     renderInputs() {
         return (
             <>
                 {this.formVariants[this.props.id].map( (fields) => {
                     return (
                         <> 
-                            <label htmlFor={fields.id}>{fields.name}</label>
-                            <input name={fields.id} id={fields.id} onChange={this.props.handleChange} />
+                            <div>
+                                <label htmlFor={fields.id}>{fields.name}</label>
+                                <input name={fields.id} id={fields.id} onChange={this.props.handleChange} />
+                            </div>
                         </>
                     )
                 })}
@@ -52,6 +60,7 @@ class ProductForm extends PureComponent {
         return (
             <div id={this.props.id}>
                 {this.renderInputs()}
+                <p>{this.formDescription[this.props.id]}</p>
             </div>
         )
     }

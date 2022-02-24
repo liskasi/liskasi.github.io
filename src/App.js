@@ -5,9 +5,9 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './components/HomePage/Home';
 import Layout from './components/Layout';
-import NoPage from './components/NoPage';
+import NoPage from './components/404/NoPage';
 import Form from './components/Form/AddProduct';
 import './App.css';
 

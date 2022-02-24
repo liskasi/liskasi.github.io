@@ -9,6 +9,18 @@ footer {
   right: 0;
   bottom: 0;
   width: 100%;
+  padding: 0 40px;
+  padding-bottom: 20px;
   overflow: hidden;
+  text-align: center;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=layout.style.css.map */
