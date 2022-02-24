@@ -19,7 +19,7 @@ class HomePage extends PureComponent {
 
     componentDidMount() {
         // Simple GET request using fetch
-        fetch('http://juniortestelizavetasirotina.epizy.com/public/')
+        fetch('https://juniortestelizavetasirotina.000webhostapp.com/')
             .then(response => response.json())
             .then((data) => this.setState({products: data}))
     }
@@ -29,7 +29,7 @@ class HomePage extends PureComponent {
       //console.log(productsChecked);
       //console.log(JSON.stringify(this.state));
 
-      fetch(`http://juniortestelizavetasirotina.epizy.com/public/delete`, {
+      fetch(`https://juniortestelizavetasirotina.000webhostapp.com/delete`, {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(productsChecked)

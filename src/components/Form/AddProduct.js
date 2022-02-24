@@ -109,7 +109,7 @@ class Product extends PureComponent {
         {
             console.log(JSON.stringify(this.state));
 
-            fetch(`http://juniortestelizavetasirotina.epizy.com/public/add-product/${type}`, {
+            fetch(`https://juniortestelizavetasirotina.000webhostapp.com/add-product/${type}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(this.state)
