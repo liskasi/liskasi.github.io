@@ -65,17 +65,6 @@ class Product extends PureComponent {
             length
         } = this.state;
 
-        // const newPrice = price.replace(',','.');
-        // const newSize = size.replace(',','.');
-        // const newWeight = weight.replace(',','.');
-        // const newHeight = height.replace(',','.');
-        // const newWidth = width.replace(',','.');
-        // const newLength = length.replace(',','.');
-
-        // this.setState({ price : newPrice, size : newSize, weight : newWeight, height : newHeight, width : newWidth, length : newLength }, () => {
-
-        // });
-
         const isPriceValid = !isNaN(price);
         const isSizeValid = type === 'dvd' && isNaN(size) ? false : true;
         const isBookValid = type === 'book' && isNaN(weight) ? false : true;
@@ -107,9 +96,6 @@ class Product extends PureComponent {
     handleChangeType(event) {
         this.setState({type:event.target.value});
         this.size.value = '';
-        //this.setState(() => this.initialState);
-        //this.setState({size: '', height: '', width: '', length: '', weight: ''});
-        //reset({size: ''});
     }
 
     handleSubmit(event) {
@@ -123,12 +109,12 @@ class Product extends PureComponent {
         {
             console.log(JSON.stringify(this.state));
 
-            fetch(`http://127.0.0.1:8000/add-product/${type}`, {
+            fetch(`http://juniortestelizavetasirotina.epizy.com/public/add-product/${type}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(this.state)
             }).then(() => {
-                window.location.href = "http://localhost:3000/";
+                window.location.href = "/";
             })
         }
     }
@@ -136,7 +122,7 @@ class Product extends PureComponent {
     cancelFunction() {
         this.setState({type: 'dvd', sku: '', name: '', price: '', size: '', height: '', width: '', length: '', weight: ''});
 
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "/";
     }
 
     renderSelect() {
