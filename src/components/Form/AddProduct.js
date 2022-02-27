@@ -2,13 +2,14 @@ import React, { PureComponent } from 'react';
 import ProductForm from '../ProductForm/ProductForm';
 import { Button } from 'react-bootstrap';
 import '../../style/Form/form.style.css';
+import { postProduct } from '../../helpers/request/request.js';
+
 
 class Product extends PureComponent {
 
     
     constructor(props) {
         super(props);
-        this.initialState = {size:''};
         this.state = {
             type: 'dvd',
             sku: '',
@@ -108,14 +109,8 @@ class Product extends PureComponent {
         if (isValid) 
         {
             console.log(JSON.stringify(this.state));
-
-            fetch(`https://juniortestelizavetasirotina.000webhostapp.com/add-product/${type}`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(this.state)
-            }).then(() => {
-                window.location.href = "/";
-            })
+            const data = this.state;
+            postProduct(type, data);
         }
     }
     
