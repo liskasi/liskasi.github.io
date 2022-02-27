@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import ProductForm from '../ProductForm/ProductForm';
 import { Button } from 'react-bootstrap';
-import '../../style/Form/form.style.css';
+import '../../style/form/form.style.css';
 import { postProduct } from '../../helpers/request/request.js';
 
 
