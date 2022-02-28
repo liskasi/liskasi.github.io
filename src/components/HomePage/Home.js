@@ -33,7 +33,7 @@ class HomePage extends PureComponent {
     }
 
     addProduct() {
-      window.location.href = "/add-product";
+      window.location.href = "#/add-product";
     }
 
     handleChange(event) {

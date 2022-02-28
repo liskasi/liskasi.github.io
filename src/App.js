@@ -1,6 +1,6 @@
 import { PureComponent } from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route
 } from 'react-router-dom';
@@ -18,9 +18,9 @@ export class App extends PureComponent {
             <div className="App">
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
+                <Route index path="/" element={<Home />} />
                 <Route exact path="/add-product" element={<Form />} />
-                <Route path="*" element={<NoPage />} />
+                <Route path="/*" element={<NoPage />} />
               </Route>
           </Routes>
           </div>
