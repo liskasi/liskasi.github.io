@@ -63,7 +63,7 @@ class HomePage extends PureComponent {
                     <ul class="product-details">
                       <li>{ sku }</li>
                       <li>{ name }</li>
-                      <li>{ price }</li>
+                      <li>{ price } $</li>
                       <li>{ attribute }</li>
                     </ul>
                   </div>
