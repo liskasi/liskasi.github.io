@@ -1,9 +1,8 @@
 import { PureComponent } from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import Home from './components/HomePage/Home';
 import Layout from './components/Layout';
