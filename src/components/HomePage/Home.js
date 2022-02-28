@@ -83,9 +83,8 @@ class HomePage extends PureComponent {
             <h1>Product List</h1>
             <div>
               <Button variant="outline-danger" disabled={isDeleting} id="delete-product-onclick" onClick={this.deleteMass}>
-                {isDeleting ? 'Deleting...' : 'DELETE MASS'}
+                {isDeleting ? 'Deleting...' : 'MASS DELETE'}
               </Button> {' '}
-
               <Button variant="outline-success" onClick={this.addProduct}>
                 ADD
               </Button> {' '}
